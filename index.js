@@ -50,10 +50,12 @@ client.connect(err => {
                                 res.status(200).send(documents);
                             })
                     }
-                    // ...
+                    else{
+                        res.status(401).send('Unauthorize Access! user not match');
+                    }
                 })
                 .catch((error) => {
-                    res.status(401).send('Unauthorize Token!');
+                    res.status(401).send('Unauthorize Access! Token not match');
                 });
         }
         else{
