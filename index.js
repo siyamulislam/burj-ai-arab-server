@@ -53,7 +53,7 @@ client.connect(err => {
                     // ...
                 })
                 .catch((error) => {
-                    // Handle error
+                    res.status(401).send('Unauthorize Token!');
                 });
         }
         else{
