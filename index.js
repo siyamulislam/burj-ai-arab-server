@@ -2,26 +2,27 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { initializeApp } = require('firebase-admin/app');
-
+var admin = require("firebase-admin");
+const { MongoClient, ObjectId } = require('mongodb');
+require('dotenv').config()
 const port = 5000
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
-var admin = require("firebase-admin");
 
-var serviceAccount = require("./burj-al-arab-2023-firebase-adminsdk-pooc5-c98f0cb4df.json");
+console.log(process.env.DB_USER)
+
+var serviceAccount = require("./configs/burj-al-arab-2023-firebase-adminsdk-pooc5-c98f0cb4df.json");
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.7oely.mongodb.net/burjAlArabDB?retryWrites=true&w=majority`;
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
 
-const userName = "arabian"
-const password = 'xrts6HoIN'
-const { MongoClient, ObjectId } = require('mongodb');
-const uri = "mongodb+srv://arabian:xrts6HoIN@cluster0.7oely.mongodb.net/burjAlArabDB?retryWrites=true&w=majority";
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect(err => {
