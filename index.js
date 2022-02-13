@@ -50,14 +50,14 @@ client.connect(err => {
                                 res.send(documents);
                             })
                     }
-
                     // ...
                 })
                 .catch((error) => {
                     // Handle error
                 });
-
-
+        }
+        else{
+            res.status(401).send('Unauthorize Access!');
         }
 
     })
